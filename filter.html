@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>自定义过滤器</title>
+</head>
+<body>
+	<div ng-app="app">
+		<h1>{{true|markfilter:1}}</h1>
+		<h1>{{false|markfilter:2}}</h1>
+		<h1>{{true|markfilter:2}}</h1>
+		<h1>{{false|markfilter:1}}</h1>
+		<input type="text" placeholder="请输入你的体重" ng-model="weight">
+		<p>{{weight}}</p>
+	</div>
+	<script src="node_modules/angular/angular.js"></script>
+	<script>
+		angular.module("app",[])
+		.filter('markfilter',function(){
+			return function(input,style){
+				style = style || 1;
+				switch(style){
+				case 1:
+				return input?'\u2315':'\u2313';
+				case 2:
+				return input?'\u2310':'\u2312';
+				}
+			}
+		})
+
+	</script>
+</body>
+</html>
